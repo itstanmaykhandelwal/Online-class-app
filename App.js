@@ -1,59 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,Image } from 'react-native';
-import Home from './src/screen/Home';
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './src/screen/Home'
+import About from './src/screen/About';
+import Contact from './src/screen/Contact';
+import Course from './src/screen/Course';
+import UserData from './src/screen/UserData';
 
-export default function App() {
-  const description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text"
-  
-  return (
-    <View style={styles.mainContainer}>
-      <View style={styles.homeTop}>
-        <Image style={styles.headerImage} resizeMode="contain" 
-          source={require('./assets/banner.jpeg')}
-        />
-        <Text style={styles.mainHeader}>Welcome to</Text>
-        <Text style={[styles.mainHeader,{fontSize:33, color:'#4c5dab',marginTop:0,}]}>Classes</Text>
-        <Text style={styles.paraStyle}>{description}</Text>
-      </View>
-    </View>
-  );
+
+const App = () => {
+
+    const Stack = createNativeStackNavigator();
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName='Home'>
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="About" component={About} />
+                <Stack.Screen name="Course" component={Course} />
+                <Stack.Screen name="Contact" component={Contact} />
+                <Stack.Screen name="UserData" component={UserData} />
+            </Stack.Navigator> 
+        </NavigationContainer>
+    )
 }
 
-const styles = StyleSheet.create({
-  mainContainer:{
-    height:'100%',
-    display:"flex",
-    justifyContent:"space-between",
-    paddingHorizontal:20,
-    backgroundColor:"#f5f5f5",
-    textAlign:"center",
-  },
-
-  homeTop:{
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center",
-    paddingHorizontal:10,
-  },  
-  headerImage:{
-    height:undefined,
-    width:'100%',
-    aspectRatio:1,
-    display:"flex",
-    alignItems:"stretch",
-    marginTop:20
-  },
-  mainHeader:{
-    fontSize:30,
-    color:"#344055",
-    textTransform:'uppercase',
-  },
-  paraStyle:{
-    textAlign:'center',
-    fontSize:19,
-    color:"#7d7d7d",
-    marginTop:30,
-    paddingBottom:50,
-    lineHeight:26
-  }
-});
+export default App
